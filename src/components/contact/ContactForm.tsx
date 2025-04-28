@@ -1,5 +1,5 @@
-
-import React from 'react';
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { FormData, FormErrors } from '@/types/contact';
 
 interface ContactFormProps {
@@ -17,12 +17,40 @@ const ContactForm = ({
   handleChange,
   handleSubmit
 }: ContactFormProps) => {
+  const form = useRef<HTMLFormElement>(null);
+  const [isSending, setIsSending] = useState(false);
+  const [sendStatus, setSendStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!form.current) return;    setIsSending(true);
+    setSendStatus('idle');
+    const serviceID = 'service_x2szltb';
+    const templateID = 'template_ur5idsw'; // Corrected Template ID
+    const publicKey = 'FARwrgz8G5Am07IzT';
+
+    emailjs.sendForm(serviceID, templateID, form.current, publicKey)
+      .then(        () => {
+          console.log('SUCCESS!');
+          setSendStatus('success');
+          setIsSending(false);
+          // form.current?.reset(); // Removed form reset
+        },
+        (error) => {
+          console.log('FAILED...', error.text);
+          setSendStatus('error');
+          setIsSending(false);
+        },
+      );
+  };
+
   return (
     <div className="md:col-span-3">
       <div className="bg-white rounded-xl shadow-md p-8">
         <h3 className="text-2xl font-semibold mb-6">Send us a message</h3>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form ref={form} onSubmit={sendEmail} className="space-y-6">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
               Your Name
@@ -86,14 +114,20 @@ const ContactForm = ({
           <div>
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSending}
               className={`w-full btn btn-primary py-3 px-6 rounded-md text-white ${
-                isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                isSending ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              {isSending ? 'Sending...' : 'Send Message'}
             </button>
           </div>
+          {sendStatus === 'success' && (
+            <p className="text-green-600 text-center mt-4">Message sent successfully!</p>
+          )}
+          {sendStatus === 'error' && (
+            <p className="text-red-600 text-center mt-4">Failed to send message. Please try again later.</p>
+          )}
         </form>
       </div>
     </div>

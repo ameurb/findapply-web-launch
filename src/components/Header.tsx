@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -38,7 +37,12 @@ const Header = () => {
     >
       <div className="container mx-auto flex justify-between items-center">
         <a href="#hero" className="flex items-center">
-          <span className="text-2xl font-bold text-primary">FindApply<span className="text-secondary">.com</span></span>
+          {/* Ensure logo text color contrasts with background */}          <span className={cn(
+            "text-2xl font-bold",
+            isScrolled ? "text-primary" : "text-white"
+          )}>
+            FindApply
+          </span>
         </a>
 
         {/* Desktop Navigation */}
@@ -47,13 +51,18 @@ const Header = () => {
             <a 
               key={link.name} 
               href={link.href} 
-              className="header-link"
+              // Update link color based on scroll state
+              className={cn(
+                "header-link transition-colors duration-300",
+                isScrolled ? "text-gray-700 hover:text-primary" : "text-white hover:text-violet-200"
+              )}
             >
               {link.name}
             </a>
           ))}
           <a
             href="#contact"
+            // Adjust button style for scrolled state if needed, assuming btn-primary handles contrast
             className="btn btn-primary px-4 py-2 rounded-md"
           >
             Get Started
@@ -62,15 +71,16 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button className="md:hidden" onClick={toggleMenu} aria-label="Toggle mobile menu">
+          {/* Ensure icon color contrasts */}
           {isMenuOpen ? (
-            <X className="h-6 w-6 text-gray-900" />
+            <X className={cn("h-6 w-6", isScrolled ? "text-gray-900" : "text-white")} />
           ) : (
-            <Menu className="h-6 w-6 text-gray-900" />
+            <Menu className={cn("h-6 w-6", isScrolled ? "text-gray-900" : "text-white")} />
           )}
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Already has white background, text should be fine */}
       <div
         className={cn(
           'fixed inset-0 bg-white z-30 flex flex-col items-center pt-24',

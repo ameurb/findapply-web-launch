@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,12 +13,6 @@ const HeroSection = () => {
     >
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl animate-fade-in">
-          <div className="mb-16">
-            <span className="text-3xl font-bold bg-gradient-to-r from-violet-200 to-indigo-300 bg-clip-text text-transparent">
-              FindApply<span>.com</span>
-            </span>
-          </div>
-          
           <h1 className="text-4xl md:text-6xl lg:text-7xl text-white font-bold mb-8 leading-[1.1]">
             Custom Software Development & AI Integration for Modern Businesses
           </h1>

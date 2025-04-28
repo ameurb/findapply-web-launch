@@ -11,30 +11,27 @@ const ContactInfo = () => {
           <div className="flex items-start">
             <div className="bg-primary/10 p-3 rounded-lg mr-4">
               <Phone className="w-5 h-5 text-primary" />
-            </div>
-            <div>
+            </div>            <div>
               <h4 className="font-medium text-gray-900">Phone</h4>
-              <p className="text-gray-600">+1 (555) 123-4567</p>
+              <p className="text-gray-600">+213 660 465 954</p>
             </div>
           </div>
           
           <div className="flex items-start">
             <div className="bg-primary/10 p-3 rounded-lg mr-4">
               <Mail className="w-5 h-5 text-primary" />
-            </div>
-            <div>
+            </div>            <div>
               <h4 className="font-medium text-gray-900">Email</h4>
-              <p className="text-gray-600">wordia.data@gmail.com</p>
+              <p className="text-gray-600">info@findapply.com</p>
             </div>
           </div>
           
           <div className="flex items-start">
             <div className="bg-primary/10 p-3 rounded-lg mr-4">
               <MessageSquare className="w-5 h-5 text-primary" />
-            </div>
-            <div>
+            </div>            <div>
               <h4 className="font-medium text-gray-900">WhatsApp</h4>
-              <p className="text-gray-600">+1 (555) 123-4567</p>
+              <p className="text-gray-600">+213 660 465 954</p>
             </div>
           </div>
         </div>
