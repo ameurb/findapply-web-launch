@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import emailjs from 'emailjs-com';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
@@ -8,9 +9,15 @@ import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 
 const Index = () => {
-  // Set up smooth scrolling
+  // Set up smooth scrolling and initialize EmailJS
   useEffect(() => {
     document.documentElement.classList.add('scroll-smooth');
+    
+    // Initialize EmailJS with your user ID
+    const emailJsUserId = import.meta.env.VITE_EMAILJS_USER_ID;
+    if (emailJsUserId) {
+      emailjs.init(emailJsUserId);
+    }
     
     // Update the document title and meta description
     document.title = "FindApply.com - App Development & AI Solutions";

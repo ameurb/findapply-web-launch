@@ -65,17 +65,17 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      // Send the email
+      // Send the email using EmailJS
       await emailjs.send(
-        'service_id', // Replace with your EmailJS service ID
-        'template_id', // Replace with your EmailJS template ID
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_id',
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_id',
         {
           from_name: formData.name,
           reply_to: formData.email,
           message: formData.message,
           to_email: 'wordia.data@gmail.com'
         },
-        'user_id' // Replace with your EmailJS user ID
+        import.meta.env.VITE_EMAILJS_USER_ID || 'user_id'
       );
 
       // Success message
